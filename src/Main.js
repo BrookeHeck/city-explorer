@@ -22,7 +22,6 @@ class Main extends React.Component {
   }
 
   setMapUrl = () => {
-    console.log(this.state.mapUrl);
     this.setState( {mapUrl: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=12`});
   }
 
@@ -33,8 +32,8 @@ class Main extends React.Component {
       this.setState({
         cityData: response.data[0],
         error: false}, this.setMapUrl);
+        console.log(this.state.mapUrl);
     } catch(error) {
-      console.log(error);
       this.setState({error: true});
     }
   }
@@ -54,7 +53,7 @@ class Main extends React.Component {
             Explore!
           </Button>
         </Form>
-        {!this.state.error ? <City cityData={this.state.cityData} map={this.state.mapUrl}/> : <Error/>}
+        {!this.state.error ? <City cityData={this.state.cityData} mapUrl={this.state.mapUrl}/> : <Error/>}  
       </main>
     );
   }
