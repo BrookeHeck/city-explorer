@@ -1,0 +1,11 @@
+h1 {
+  width: fit-content;
+  margin: 0 auto;
+  padding: 5px;
+  color: black;
+}
+
+header {
+  border-bottom: solid gray 2px;
+  margin-bottom: 10px;
+}
