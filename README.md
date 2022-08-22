@@ -20,6 +20,10 @@
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
+<br/><br/><br/>
+### WWRC 1
+<img src='./whiteBoardImg/whiteBoard06.png' width='600px' height='auto' />
+
 
 <br/><br/><br/>
 # Getting Started with Create React App
