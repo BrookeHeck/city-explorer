@@ -1,16 +1,17 @@
 import React from 'react';
-import Alert from 'react-bootstrap/Alert'
+import Modal from 'react-bootstrap/Modal';
 
 class Error extends React.Component {
   render() {
     return (
-      <Alert variant="info">
-      <Alert.Heading>Sorry, we couldn't find what your looking for.</Alert.Heading>
-      <hr />
-      <p className="mb-0">
-        Please check the spelling of the city entered.
-      </p>
-    </Alert>
+      <Modal show={this.props.error}>
+        <Modal.Header closeButton onClick={this.props.closeErrorModal}>
+          <Modal.Title>Sorry, we couldn't find the city you were looking for.</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Please double check the spelling of the city.</p>
+        </Modal.Body>
+      </Modal>
     );
   }
 }

@@ -1,13 +1,13 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import './City.css';
 
 class City extends React.Component {
   render() {
     return (
       <>
-        <Card style={{ width: '25rem' }}>
-          <Card.Img variant="bottom" src={this.props.mapUrl} alt='map' />
+        <Card style={{ width: '25rem'}}>
           <Card.Body>
           <Card.Title>{this.props.cityData.display_name}</Card.Title>
             <Card.Text>
@@ -15,6 +15,7 @@ class City extends React.Component {
           </Card.Text>
           <Button variant="primary">Details</Button>
           </Card.Body>
+          <Card.Img variant="bottom" src={this.props.mapUrl} alt='map' />
         </Card>
       </>
     );
