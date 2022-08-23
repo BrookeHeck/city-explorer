@@ -17,7 +17,8 @@ class Main extends React.Component {
       mapUrl: [],
       error: false,
       showMap: false,
-      selectedCity: {}
+      selectedCity: {},
+      weatherData: {}
     }
   }
 
@@ -43,7 +44,7 @@ class Main extends React.Component {
     }, []);
     let newMapArr = this.state.mapUrl;
     newMapArr.splice(cityIndex, -1);
-    this.setState({cityData: newCityArr, mapUrl: newMapArr}, this.createCityCards);
+    this.setState({cityData: newCityArr, mapUrl: newMapArr}, this.handleWeatherSubmit);
   }
 
   createCityCards() {
@@ -63,7 +64,8 @@ class Main extends React.Component {
   handleCitySubmit = async (e) => {
     e.preventDefault();
     try {
-      let response = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.searchString}&format=json`);
+      let response = await axios.
+      get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.searchString}&format=json`);
       let newArr = [...this.state.cityData];
       newArr.unshift(response.data[0]);
       this.setState({
@@ -89,6 +91,13 @@ class Main extends React.Component {
 
   closeMapModal = () => {
     this.setState({showMap: false})
+  }
+
+  handleWeatherSubmit = async () => {
+    let weatherData = await axios.
+    get(`${process.env.REACT_APP_SERVER}/weather?search=${this.state.searchString}&lat=${this.state.cityData.lat}&lon=${this.state.cityData.lon}`);
+    console.log(weatherData.data);
+    this.setState({weatherData: weatherData.data}, this.createCityCards);
   }
 
   
