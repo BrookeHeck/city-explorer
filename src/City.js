@@ -6,6 +6,8 @@ import './City.css';
 class City extends React.Component {
   handleRemove = () => this.props.removeCity(this.props.cityData.display_name);
 
+  handleSelect = () => {this.props.handleMapSelect(this.props.cityData.display_name, this.props.mapUrl)};
+
   render() {
     return (
       <>
@@ -21,7 +23,7 @@ class City extends React.Component {
           <Button variant='primary'>Details</Button>
           <Button variant='primary' onClick={this.handleRemove}>Remove</Button>
           </Card.Body>
-          <Card.Img variant="bottom" src={this.props.mapUrl} alt='map' />
+          <Card.Img variant="bottom" src={this.props.mapUrl} alt='map' onClick={this.handleSelect} />
         </Card>
       </>
     );

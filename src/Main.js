@@ -5,6 +5,7 @@ import axios from 'axios';
 import City from './City.js';
 import Error from './Error.js';
 import './Main.css';
+import SelectedMap from './SelectedMap.js';
 
 class Main extends React.Component {
   constructor(props) {
@@ -14,7 +15,9 @@ class Main extends React.Component {
       cityData: [],
       cityCards: [],
       mapUrl: [],
-      error: false
+      error: false,
+      showMap: false,
+      selectedCity: {}
     }
   }
 
@@ -51,6 +54,7 @@ class Main extends React.Component {
             mapUrl={this.state.mapUrl[idx]}
             key={city.place_id}
             removeCity={this.removeCity}
+            handleMapSelect={this.handleMapSelect}
           />
         ))
       });
@@ -71,9 +75,22 @@ class Main extends React.Component {
     }
   }
 
+  handleMapSelect = (cityName, map) => {
+    this.setState({selectedCity: {cityName: cityName, map: map}}, this.showMapModal);
+  }
+
+  showMapModal = () => {
+    this.setState({showMap: true})
+  }
+
   closeErrorModal = () => {
     this.setState({error: false});
   }
+
+  closeMapModal = () => {
+    this.setState({showMap: false})
+  }
+
   
   render() {
     return(
@@ -91,6 +108,7 @@ class Main extends React.Component {
         <section id='cityCards'>
           {this.state.cityCards}
         </section>
+        <SelectedMap closeMapModal={this.closeMapModal} cityName={this.state.selectedCity.cityName} map={this.state.selectedCity.map} showMap={this.state.showMap}/>
         <Error error={this.state.error} closeErrorModal={this.closeErrorModal}/>
       </main>
     );
