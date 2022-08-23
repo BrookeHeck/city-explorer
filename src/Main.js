@@ -11,8 +11,9 @@ class Main extends React.Component {
     super(props);
     this.state = {
       searchString: '',
-      cityData: {},
-      mapUrl: '',
+      cityData: [],
+      cityCards: [],
+      mapUrl: [],
       error: false
     }
   }
@@ -24,21 +25,54 @@ class Main extends React.Component {
 
   setMapUrl = () => {
     if(!this.state.error) {
-      this.setState( {mapUrl: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=12`});
+      let newArr = [...this.state.mapUrl]
+      newArr.unshift( `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData[0].lat},${this.state.cityData[0].lon}&zoom=12`);
+      this.setState( {mapUrl:newArr}, this.createCityCards);
     }
+  }
+
+  removeCity = cityName => {
+    let cityIndex = -1;
+    let newCityArr = this.state.cityData.reduce((accumulator, city) => {
+      if(city.display_name !== cityName) accumulator.push(city);
+      else cityIndex = accumulator.length;
+      return accumulator;
+    }, []);
+    let newMapArr = this.state.mapUrl;
+    newMapArr.splice(cityIndex, -1);
+    this.setState({cityData: newCityArr, mapUrl: newMapArr}, this.createCityCards);
+  }
+
+  createCityCards() {
+    this.setState(
+      {cityCards: this.state.cityData.map((city, idx) => (
+          <City 
+            cityData={city}
+            mapUrl={this.state.mapUrl[idx]}
+            key={city.place_id}
+            removeCity={this.removeCity}
+          />
+        ))
+      });
   }
 
   handleCitySubmit = async (e) => {
     e.preventDefault();
     try {
       let response = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.searchString}&format=json`);
+      let newArr = [...this.state.cityData];
+      newArr.unshift(response.data[0]);
       this.setState({
-        cityData: response.data[0],
+        cityData: newArr,
         error: false}, this.setMapUrl);
     } catch(error) {
       console.log('Error: ', error);
       this.setState({error: true});
     }
+  }
+
+  closeErrorModal = () => {
+    this.setState({error: false});
   }
   
   render() {
@@ -55,8 +89,9 @@ class Main extends React.Component {
           </Button>
         </Form>
         <section id='cityCards'>
-          {!this.state.error ? (JSON.stringify(this.state.cityData) === '{}' ? null : <City cityData={this.state.cityData} mapUrl={this.state.mapUrl}/>) : <Error/>}
+          {this.state.cityCards}
         </section>
+        <Error error={this.state.error} closeErrorModal={this.closeErrorModal}/>
       </main>
     );
   }

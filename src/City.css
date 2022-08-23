@@ -1,0 +1,9 @@
+img {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+}
+
+.card-title {
+  height: 50px;
+}
