@@ -22,7 +22,7 @@ This application allows a user to search a city. A display shows the user a map 
 
 <br/><br/><br/>
 ## Lab 06
-### API Request Chart
+### WRRC
 <img src='./whiteBoardImg/whiteBoard06.png' width='600px' height='auto' />
 
 ### Features
@@ -51,6 +51,42 @@ This application allows a user to search a city. A display shows the user a map 
 ***Name of feature: Error Alert***
 
 - Estimate of time needed to complete: 1 hr
+
+- Start time: 1500
+
+- Finish time: 1600
+
+- Actual time needed to complete: 1 hr
+
+<br/><br/><br/>
+# Lab07
+### WRRC
+<img src='./whiteBoardImg/whiteBoard07.pmg.png' width='600px' height='auto' />
+
+### Features
+***Name of feature: Back End Server***
+
+- Estimate of time needed to complete: 2 hr
+
+- Start time: 1000
+
+- Finish time: 1200
+
+- Actual time needed to complete: 2 hr
+
+***Name of feature: Weather***
+
+- Estimate of time needed to complete: 1 hr
+
+- Start time: 1430
+
+- Finish time: 1515
+
+- Actual time needed to complete: .75 hr
+
+***Name of feature: Error Alert***
+
+- Estimate of time needed to complete: 1hr
 
 - Start time: 1500
 

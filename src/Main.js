@@ -5,6 +5,7 @@ import axios from 'axios';
 import City from './City.js';
 import Error from './Error.js';
 import './Main.css';
+import SelectedMap from './SelectedMap.js';
 
 class Main extends React.Component {
   constructor(props) {
@@ -14,7 +15,10 @@ class Main extends React.Component {
       cityData: [],
       cityCards: [],
       mapUrl: [],
-      error: false
+      error: false,
+      showMap: false,
+      selectedCity: {},
+      weatherData: {}
     }
   }
 
@@ -40,7 +44,7 @@ class Main extends React.Component {
     }, []);
     let newMapArr = this.state.mapUrl;
     newMapArr.splice(cityIndex, -1);
-    this.setState({cityData: newCityArr, mapUrl: newMapArr}, this.createCityCards);
+    this.setState({cityData: newCityArr, mapUrl: newMapArr}, this.handleWeatherSubmit);
   }
 
   createCityCards() {
@@ -51,6 +55,7 @@ class Main extends React.Component {
             mapUrl={this.state.mapUrl[idx]}
             key={city.place_id}
             removeCity={this.removeCity}
+            handleMapSelect={this.handleMapSelect}
           />
         ))
       });
@@ -71,9 +76,28 @@ class Main extends React.Component {
     }
   }
 
+  handleMapSelect = (cityName, map) => {
+    this.setState({selectedCity: {cityName: cityName, map: map}}, this.showMapModal);
+  }
+
+  showMapModal = () => {
+    this.setState({showMap: true})
+  }
+
   closeErrorModal = () => {
     this.setState({error: false});
   }
+
+  closeMapModal = () => {
+    this.setState({showMap: false})
+  }
+
+  handleWeatherSubmit = async () => {
+    let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?search=${this.state.searchString}&lat=${this.state.cityData.lat}&lon=${this.state.cityData.lon}`);
+    console.log(weatherData.data);
+    this.setState({weatherData: weatherData.data}, this.createCityCards);
+  }
+
   
   render() {
     return(
@@ -91,6 +115,7 @@ class Main extends React.Component {
         <section id='cityCards'>
           {this.state.cityCards}
         </section>
+        <SelectedMap closeMapModal={this.closeMapModal} cityName={this.state.selectedCity.cityName} map={this.state.selectedCity.map} showMap={this.state.showMap}/>
         <Error error={this.state.error} closeErrorModal={this.closeErrorModal}/>
       </main>
     );
