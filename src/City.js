@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import './City.css';
 
 class City extends React.Component {
+  handleRemove = () => this.props.removeCity(this.props.cityData.display_name);
+
   render() {
     return (
       <>
@@ -13,7 +15,11 @@ class City extends React.Component {
             <Card.Text>
               Coordinates: {this.props.cityData.lat}, {this.props.cityData.lon}
           </Card.Text>
-          <Button variant="primary">Details</Button>
+          <Card.Text>
+              Weather: Lorem Ipsum
+          </Card.Text>
+          <Button variant='primary'>Details</Button>
+          <Button variant='primary' onClick={this.handleRemove}>Remove</Button>
           </Card.Body>
           <Card.Img variant="bottom" src={this.props.mapUrl} alt='map' />
         </Card>

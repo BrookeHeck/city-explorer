@@ -31,10 +31,27 @@ class Main extends React.Component {
     }
   }
 
+  removeCity = cityName => {
+    let cityIndex = -1;
+    let newCityArr = this.state.cityData.reduce((accumulator, city) => {
+      if(city.display_name !== cityName) accumulator.push(city);
+      else cityIndex = accumulator.length;
+      return accumulator;
+    }, []);
+    let newMapArr = this.state.mapUrl;
+    newMapArr.splice(cityIndex, -1);
+    this.setState({cityData: newCityArr, mapUrl: newMapArr}, this.createCityCards);
+  }
+
   createCityCards() {
     this.setState(
       {cityCards: this.state.cityData.map((city, idx) => (
-          <City cityData={city} mapUrl={this.state.mapUrl[idx]} key={city.place_id} />
+          <City 
+            cityData={city}
+            mapUrl={this.state.mapUrl[idx]}
+            key={city.place_id}
+            removeCity={this.removeCity}
+          />
         ))
       });
   }
