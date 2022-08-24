@@ -1,15 +1,16 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
+import './Error.css';
 
 class Error extends React.Component {
   render() {
     return (
       <Modal show={this.props.error}>
         <Modal.Header closeButton onClick={this.props.closeErrorModal}>
-          <Modal.Title>Sorry, we couldn't find the city you were looking for.</Modal.Title>
+          <Modal.Title>Sorry, we couldn't find the city you are looking for.</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Please double check the spelling of the city.</p>
+          <img src='../img/teapotDog.jpg' alt='Cute Puppies'/>
         </Modal.Body>
       </Modal>
     );
