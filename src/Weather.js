@@ -2,7 +2,7 @@ import React from 'react'
 
 class Weather extends React.Component {
   render() {
-    
+    console.log(this.props.weatherData);
     return (
       <>
         <p>Weather</p>
