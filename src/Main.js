@@ -5,20 +5,18 @@ import axios from 'axios';
 import City from './City.js';
 import Error from './Error.js';
 import './Main.css';
-import SelectedMap from './SelectedMap.js';
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       searchString: '',
-      cityData: [],
-      cityCards: [],
-      mapUrl: [],
+      cityData: {},
+      mapUrl: '',
       error: false,
-      showMap: false,
-      selectedCity: {},
-      weatherData: []
+      weatherData: [],
+      cityCard: '',
+      movieData: []
     }
   }
 
@@ -29,10 +27,9 @@ class Main extends React.Component {
 
   setMapUrl = () => {
     if(!this.state.error) {
-      let newArr = [...this.state.mapUrl]
       try {
-        newArr.unshift( `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData[0].lat},${this.state.cityData[0].lon}&zoom=12`);
-        this.setState( {mapUrl:newArr}, this.createCityCards);
+        let url = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=12`;
+        this.setState( {mapUrl:url}, this.createCityCard);
       } catch(e) {
         console.log('Error: ', e);
         this.setState({error: true});
@@ -40,43 +37,24 @@ class Main extends React.Component {
     }
   }
 
-  removeCity = cityName => {
-    let cityIndex = -1;
-    let newCityArr = this.state.cityData.reduce((accumulator, city) => {
-      if(city.display_name !== cityName) accumulator.push(city);
-      else cityIndex = accumulator.length;
-      return accumulator;
-    }, []);
-    let newMapArr = this.state.mapUrl;
-    newMapArr.splice(cityIndex, 1);
-    let newWeatherArr = this.state.weatherData;
-    newWeatherArr.splice(cityIndex, 1);
-    this.setState({cityData: newCityArr, mapUrl: newMapArr, weatherData: newWeatherArr}, this.createCityCards);
-  }
-
-  createCityCards() {
-    this.setState(
-      {cityCards: this.state.cityData.map((city, idx) => (
-          <City 
-            cityData={city}
-            mapUrl={this.state.mapUrl[idx]}
-            key={city.place_id}
-            removeCity={this.removeCity}
-            handleMapSelect={this.handleMapSelect}
-            weatherData={this.state.weatherData[idx]}
-          />
-        ))
-      });
+  createCityCard() {
+    this.setState({
+      cityCard: <City 
+        cityData={this.state.cityData}
+        mapUrl={this.state.mapUrl}
+        key={this.state.cityData.place_id}
+        weatherData={this.state.weatherData}
+        movieData={this.state.movieData}
+      />
+    })
   }
 
   handleCitySubmit = async (e) => {
     e.preventDefault();
     try {
       let response = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.searchString}&format=json`);
-      let newArr = [...this.state.cityData];
-      newArr.unshift(response.data[0]);
       this.setState({
-        cityData: newArr,
+        cityData: response.data[0],
         error: false}, this.handleWeatherSubmit);
     } catch(error) {
       console.log('Error: ', error);
@@ -84,33 +62,27 @@ class Main extends React.Component {
     }
   }
 
-  handleMapSelect = (cityName, map) => {
-    this.setState({selectedCity: {cityName: cityName, map: map}}, this.showMapModal);
-  }
-
-  showMapModal = () => {
-    this.setState({showMap: true})
-  }
-
   closeErrorModal = () => {
     this.setState({error: false});
   }
 
-  closeMapModal = () => {
-    this.setState({showMap: false})
-  }
-
   handleWeatherSubmit = async () => {
     try {
-      let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city=${this.state.searchString}`);
-      let newWeatherData = this.state.weatherData;
-      newWeatherData.unshift(weatherData.data);
-      this.setState({weatherData: newWeatherData}, this.setMapUrl);
+      let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${this.state.cityData.lat}&lon=${this.state.cityData.lon}`);
+      this.setState({weatherData: weatherData.data}, this.getCityMovies);
     } catch(e) {
       console.log('Error: ', e);
-      let cityData = this.state.cityData;
-      cityData.shift();
-      this.setState({error: true, cityData: cityData});
+      this.setState({error: true});
+    }
+  }
+
+  getCityMovies = async () => {
+    try {
+      let movieData = await axios.get(`${process.env.REACT_APP_SERVER}/movies?city=${this.state.searchString}`);
+      this.setState({movieData: movieData.data}, this.setMapUrl);
+    } catch(e) {
+      console.log('Error: ', e);
+      this.setState({error: true});
     }
   }
 
@@ -129,9 +101,8 @@ class Main extends React.Component {
           </Button>
         </Form>
         <section id='cityCards'>
-          {this.state.cityCards}
+          {this.state.cityCard}
         </section>
-        <SelectedMap closeMapModal={this.closeMapModal} cityName={this.state.selectedCity.cityName} map={this.state.selectedCity.map} showMap={this.state.showMap}/>
         <Error error={this.state.error} closeErrorModal={this.closeErrorModal}/>
       </main>
     );

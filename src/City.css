@@ -4,10 +4,14 @@ img {
   object-fit: contain;
 }
 
-img:hover {
-  cursor: pointer;
-}
-
 .card-title {
   height: 50px;
+}
+
+.accordion {
+  width: 80vw;
+}
+
+.accordion-body {
+  display: flex;
 }
