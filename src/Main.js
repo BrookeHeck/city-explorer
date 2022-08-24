@@ -102,7 +102,7 @@ class Main extends React.Component {
 
   handleWeatherSubmit = async () => {
     try {
-      let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city=${this.state.searchString}`);
+      let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${this.state.cityData[0].lat}&lon=${this.state.cityData[0].lon}`);
       let newWeatherData = this.state.weatherData;
       newWeatherData.unshift(weatherData.data);
       this.setState({weatherData: newWeatherData}, this.setMapUrl);

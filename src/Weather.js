@@ -1,14 +1,13 @@
 import React from 'react'
 
 class Weather extends React.Component {
+  weatherArr = [`Date: ${this.props.weatherData.date}`, `Temp: ${this.props.weatherData.temp}`, `Description: ${this.props.weatherData.description}`];
   render() {
     return (
       <>
         <p>Weather</p>
         <ul>
-          {
-            this.props.weatherData.map((forecast, idx) => <li key={idx}>{`${forecast.date}: ${forecast.description}`}</li>)
-          }
+          {this.weatherArr.map(data => <li>{data}</li>)}
         </ul>
       </>
     );
