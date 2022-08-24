@@ -43,8 +43,10 @@ class Main extends React.Component {
       return accumulator;
     }, []);
     let newMapArr = this.state.mapUrl;
-    newMapArr.splice(cityIndex, -1);
-    this.setState({cityData: newCityArr, mapUrl: newMapArr}, this.createCityCards);
+    newMapArr.splice(cityIndex, 1);
+    let newWeatherArr = this.state.weatherData;
+    newWeatherArr.splice(cityIndex, 1);
+    this.setState({cityData: newCityArr, mapUrl: newMapArr, weatherData: newWeatherArr}, this.createCityCards);
   }
 
   createCityCards() {
@@ -96,7 +98,7 @@ class Main extends React.Component {
   handleWeatherSubmit = async () => {
     let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city=${this.state.searchString}`);
     let newWeatherData = this.state.weatherData;
-    newWeatherData.push(weatherData.data);
+    newWeatherData.unshift(weatherData.data);
     this.setState({weatherData: newWeatherData}, this.createCityCards);
   }
 
