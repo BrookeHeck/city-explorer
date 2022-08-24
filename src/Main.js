@@ -18,7 +18,7 @@ class Main extends React.Component {
       error: false,
       showMap: false,
       selectedCity: {},
-      weatherData: {}
+      weatherData: []
     }
   }
 
@@ -31,7 +31,7 @@ class Main extends React.Component {
     if(!this.state.error) {
       let newArr = [...this.state.mapUrl]
       newArr.unshift( `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData[0].lat},${this.state.cityData[0].lon}&zoom=12`);
-      this.setState( {mapUrl:newArr}, this.createCityCards);
+      this.setState( {mapUrl:newArr}, this.handleWeatherSubmit);
     }
   }
 
@@ -43,8 +43,10 @@ class Main extends React.Component {
       return accumulator;
     }, []);
     let newMapArr = this.state.mapUrl;
-    newMapArr.splice(cityIndex, -1);
-    this.setState({cityData: newCityArr, mapUrl: newMapArr}, this.handleWeatherSubmit);
+    newMapArr.splice(cityIndex, 1);
+    let newWeatherArr = this.state.weatherData;
+    newWeatherArr.splice(cityIndex, 1);
+    this.setState({cityData: newCityArr, mapUrl: newMapArr, weatherData: newWeatherArr}, this.createCityCards);
   }
 
   createCityCards() {
@@ -56,6 +58,7 @@ class Main extends React.Component {
             key={city.place_id}
             removeCity={this.removeCity}
             handleMapSelect={this.handleMapSelect}
+            weatherData={this.state.weatherData[idx]}
           />
         ))
       });
@@ -72,7 +75,7 @@ class Main extends React.Component {
         error: false}, this.setMapUrl);
     } catch(error) {
       console.log('Error: ', error);
-      this.setState({error: true});
+      this.setState({error: true}, this.setMapUrl);
     }
   }
 
@@ -93,9 +96,10 @@ class Main extends React.Component {
   }
 
   handleWeatherSubmit = async () => {
-    let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?search=${this.state.searchString}&lat=${this.state.cityData.lat}&lon=${this.state.cityData.lon}`);
-    console.log(weatherData.data);
-    this.setState({weatherData: weatherData.data}, this.createCityCards);
+    let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city=${this.state.searchString}`);
+    let newWeatherData = this.state.weatherData;
+    newWeatherData.unshift(weatherData.data);
+    this.setState({weatherData: newWeatherData}, this.createCityCards);
   }
 
   

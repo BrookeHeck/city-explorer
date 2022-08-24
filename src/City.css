@@ -4,6 +4,10 @@ img {
   object-fit: contain;
 }
 
+img:hover {
+  cursor: pointer;
+}
+
 .card-title {
   height: 50px;
 }
