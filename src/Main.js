@@ -30,8 +30,13 @@ class Main extends React.Component {
   setMapUrl = () => {
     if(!this.state.error) {
       let newArr = [...this.state.mapUrl]
-      newArr.unshift( `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData[0].lat},${this.state.cityData[0].lon}&zoom=12`);
-      this.setState( {mapUrl:newArr}, this.handleWeatherSubmit);
+      try {
+        newArr.unshift( `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData[0].lat},${this.state.cityData[0].lon}&zoom=12`);
+        this.setState( {mapUrl:newArr}, this.handleWeatherSubmit);
+      } catch(e) {
+        console.log('Error: ', e);
+        this.setState({error: true});
+      }
     }
   }
 
@@ -75,7 +80,7 @@ class Main extends React.Component {
         error: false}, this.setMapUrl);
     } catch(error) {
       console.log('Error: ', error);
-      this.setState({error: true}, this.setMapUrl);
+      this.setState({error: true});
     }
   }
 
@@ -96,10 +101,15 @@ class Main extends React.Component {
   }
 
   handleWeatherSubmit = async () => {
-    let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city=${this.state.searchString}`);
-    let newWeatherData = this.state.weatherData;
-    newWeatherData.unshift(weatherData.data);
-    this.setState({weatherData: newWeatherData}, this.createCityCards);
+    try {
+      let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city=${this.state.searchString}`);
+      let newWeatherData = this.state.weatherData;
+      newWeatherData.unshift(weatherData.data);
+      this.setState({weatherData: newWeatherData}, this.createCityCards);
+    } catch(e) {
+      console.log('Error: ', e);
+      this.setState({error: true});
+    }
   }
 
   
