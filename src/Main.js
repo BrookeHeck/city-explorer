@@ -55,7 +55,6 @@ class Main extends React.Component {
   }
 
   createCityCards() {
-    console.log(this.state.weatherData);
     this.setState(
       {cityCards: this.state.cityData.map((city, idx) => (
           <City 
@@ -109,7 +108,9 @@ class Main extends React.Component {
       this.setState({weatherData: newWeatherData}, this.setMapUrl);
     } catch(e) {
       console.log('Error: ', e);
-      this.setState({error: true});
+      let cityData = this.state.cityData;
+      cityData.shift();
+      this.setState({error: true, cityData: cityData});
     }
   }
 

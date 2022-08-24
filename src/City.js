@@ -10,7 +10,6 @@ class City extends React.Component {
   handleSelect = () => {this.props.handleMapSelect(this.props.cityData.display_name, this.props.mapUrl)};
 
   render() {
-    console.log(this.props.weatherData);
     return (
       <>
         <Card style={{ width: '25rem'}}>
