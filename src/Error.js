@@ -10,7 +10,7 @@ class Error extends React.Component {
           <Modal.Title>Sorry, we couldn't find the city you are looking for.</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <img src='../img/teapotDog.jpg' alt='Cute Puppies'/>
+          <img src='../img/errorPhoto.avif' alt='Angry Octopus'/>
         </Modal.Body>
       </Modal>
     );

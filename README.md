@@ -22,6 +22,7 @@ This application allows a user to search a city. A display shows the user a map 
 08-23-2022 7:32pm - Application now has a fully-functional express server, with a GET route receiving weather data
 
 ## Credit and Collaborations
+- [Error Photo](https://images.unsplash.com/photo-1621508638997-e30808c10653?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80)
 
 <br/><br/><br/>
 ## Lab 06
