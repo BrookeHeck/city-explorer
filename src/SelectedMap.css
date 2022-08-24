@@ -1,0 +1,10 @@
+.modal-content {
+  width: 50vw;
+  height: 90vh;
+}
+
+.modal-body img {
+  width: 100%;
+  height: 75vh;
+  object-fit: cover;
+}

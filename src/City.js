@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Weather from './Weather.js';
 import './City.css';
 
 class City extends React.Component {
@@ -17,9 +18,7 @@ class City extends React.Component {
             <Card.Text>
               Coordinates: {this.props.cityData.lat}, {this.props.cityData.lon}
           </Card.Text>
-          <Card.Text>
-              Weather: Lorem Ipsum
-          </Card.Text>
+          <Weather weatherData={this.props.weatherData}/>
           <Button variant='primary'>Details</Button>
           <Button variant='primary' onClick={this.handleRemove}>Remove</Button>
           </Card.Body>
