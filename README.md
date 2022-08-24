@@ -1,6 +1,7 @@
 # City Explorer
 
 **Author**: Brooke Heck
+
 **Version**: 1.0.0
 
 ## Overview
@@ -12,11 +13,13 @@ This application allows a user to search a city. A display shows the user a map 
 ## Architecture
 - React
 - Bootstrap React and Bootstrap
+- Axios
 
 ## Change Log
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example: -->
 
 08-22-2022 4:00pm - Application calls LocationIQ API and uses the data received to display the city, county, country, and coordinates of the city. A map is also displayed.
+08-23-2022 7:32pm - Application now has a fully-functional express server, with a GET route receiving weather data
 
 ## Credit and Collaborations
 
@@ -76,23 +79,23 @@ This application allows a user to search a city. A display shows the user a map 
 
 ***Name of feature: Weather***
 
-- Estimate of time needed to complete: 1 hr
+- Estimate of time needed to complete: 2 hr
 
-- Start time: 1430
+- Start time: 1530
 
-- Finish time: 1515
+- Finish time: 1930
 
-- Actual time needed to complete: .75 hr
+- Actual time needed to complete: 4 hr
 
 ***Name of feature: Error Alert***
 
 - Estimate of time needed to complete: 1hr
 
-- Start time: 1500
+- Start time: 1930
 
-- Finish time: 1600
+- Finish time: 2000
 
-- Actual time needed to complete: 1 hr
+- Actual time needed to complete: .5 hr
 
 
 <br/><br/><br/>
