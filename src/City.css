@@ -11,3 +11,7 @@ img {
 .accordion {
   width: 80vw;
 }
+
+.accordion-body {
+  display: flex;
+}

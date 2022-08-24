@@ -21,7 +21,11 @@ class City extends React.Component {
           <Accordion.Item eventKey="1">
             <Accordion.Header>Weather</Accordion.Header>
             <Accordion.Body>
-              <Weather weatherData={this.props.weatherData} />
+              {
+                this.props.weatherData.map((forecast, idx) => (
+                  <Weather forecast={forecast} key={idx}/>
+                ))
+              }
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
