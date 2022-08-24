@@ -5,7 +5,6 @@ class Weather extends React.Component {
   render() {
     return (
       <>
-        <p>Weather</p>
         <ul>
           {this.weatherArr.map(data => <li>{data}</li>)}
         </ul>

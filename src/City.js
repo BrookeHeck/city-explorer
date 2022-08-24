@@ -1,29 +1,37 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import Accordion from 'react-bootstrap/Accordion';
 import Weather from './Weather.js';
+import Movie from './Movie.js';
 import './City.css';
 
 class City extends React.Component {
-  handleRemove = () => this.props.removeCity(this.props.cityData.display_name);
-
-  handleSelect = () => {this.props.handleMapSelect(this.props.cityData.display_name, this.props.mapUrl)};
-
   render() {
     return (
       <>
-        <Card style={{ width: '25rem'}}>
-          <Card.Body>
-          <Card.Title>{this.props.cityData.display_name}</Card.Title>
-            <Card.Text>
-              Coordinates: {this.props.cityData.lat}, {this.props.cityData.lon}
-          </Card.Text>
-          <Weather weatherData={this.props.weatherData}/>
-          <Button variant='primary'>Details</Button>
-          <Button variant='primary' onClick={this.handleRemove}>Remove</Button>
-          </Card.Body>
-          <Card.Img variant="bottom" src={this.props.mapUrl} alt='map' onClick={this.handleSelect} />
-        </Card>
+        <h2>{this.props.cityData.display_name}</h2>
+        <img src={this.props.mapUrl} alt='map' />
+        <Accordion defaultActiveKey="0">
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>Coordinates</Accordion.Header>
+            <Accordion.Body>
+              <p>Latitude: {this.props.cityData.lat}</p>
+              <p>Longitude: {this.props.cityData.lon}</p>
+            </Accordion.Body>
+          </Accordion.Item>
+          <Accordion.Item eventKey="1">
+            <Accordion.Header>Weather</Accordion.Header>
+            <Accordion.Body>
+              <Weather weatherData={this.props.weatherData} />
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+        <>
+          {
+            this.props.movieData.map(movie => (
+              <Movie movie={movie} key={movie.id}/>
+            ))
+          }
+        </>
       </>
     );
   }
