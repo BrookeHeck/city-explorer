@@ -4,10 +4,10 @@
 }
 
 .card-body {
-  overflow: hidden;
   height: 656px;
 }
 
-.card {
+#movies .card {
   margin-bottom: 5px;
+  height: 656px;
 }

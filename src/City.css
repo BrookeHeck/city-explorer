@@ -10,10 +10,6 @@ img {
   object-fit: contain;
 }
 
-.card-title {
-  height: 50px;
-}
-
 .accordion {
   width: 75vw;
   flex-direction: column;
