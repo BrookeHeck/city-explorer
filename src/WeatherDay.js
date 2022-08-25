@@ -2,7 +2,7 @@ import React from 'react'
 import Card from 'react-bootstrap/Card';
 import './Weather.css';
 
-class Weather extends React.Component {
+class WeatherDay extends React.Component {
   render() {
     return (
       <>
@@ -19,4 +19,4 @@ class Weather extends React.Component {
   }
 }
 
-export default Weather;
+export default WeatherDay;
