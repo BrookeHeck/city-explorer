@@ -5,4 +5,9 @@
 
 .card-body {
   overflow: hidden;
+  height: 656px;
+}
+
+.card {
+  margin-bottom: 5px;
 }

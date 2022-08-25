@@ -9,13 +9,12 @@ class City extends React.Component {
     return (
       <>
         <h2>{this.props.cityData.display_name}</h2>
-        <img src={this.props.mapUrl} alt='map' />
         <Accordion defaultActiveKey="0">
           <Accordion.Item eventKey="0">
             <Accordion.Header>Coordinates</Accordion.Header>
             <Accordion.Body>
-              <p>Latitude: {this.props.cityData.lat}</p>
-              <p>Longitude: {this.props.cityData.lon}</p>
+              <p>Latitude: {this.props.cityData.lat}, </p>
+              <p> Longitude: {this.props.cityData.lon}</p>
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="1">
@@ -23,19 +22,20 @@ class City extends React.Component {
             <Accordion.Body>
               {
                 this.props.weatherData.map((forecast, idx) => (
-                  <Weather forecast={forecast} key={idx}/>
+                  <Weather forecast={forecast} key={idx} />
                 ))
               }
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
-        <>
+        <img src={this.props.mapUrl} alt='map' />
+        <div id="movies">
           {
             this.props.movieData.map(movie => (
-              <Movie movie={movie} key={movie.id}/>
+              <Movie movie={movie} key={movie.id} />
             ))
           }
-        </>
+        </div>
       </>
     );
   }
