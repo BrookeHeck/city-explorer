@@ -2,7 +2,7 @@
 
 **Author**: Brooke Heck
 
-**Version**: 1.0.0
+**Version**: 3.0.0
 
 ## Overview
 This application allows a user to search a city. A display shows the user a map along with links to data about the city weather and movies.
@@ -19,7 +19,11 @@ This application allows a user to search a city. A display shows the user a map 
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example: -->
 
 08-22-2022 4:00pm - Application calls LocationIQ API and uses the data received to display the city, county, country, and coordinates of the city. A map is also displayed.
+
 08-23-2022 7:32pm - Application now has a fully-functional express server, with a GET route receiving weather data
+
+08-24-2022 6:14pm - Application now displays five day forecast and related movies for search city
+
 
 ## Credit and Collaborations
 - [Error Photo](https://images.unsplash.com/photo-1621508638997-e30808c10653?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80)
@@ -97,6 +101,42 @@ This application allows a user to search a city. A display shows the user a map 
 - Finish time: 2000
 
 - Actual time needed to complete: .5 hr
+
+<br/><br/><br/>
+# Lab08
+### WRRC
+<img src='./whiteBoardImg/whiteBoard08.png' width='600px' height='auto' />
+
+### Features
+***Name of feature: 5 Day Forecast Request***
+
+- Estimate of time needed to complete: 2 hr
+
+- Start time: 1000
+
+- Finish time: 1200
+
+- Actual time needed to complete: 2 hr
+
+***Name of feature: MovieDB Request***
+
+- Estimate of time needed to complete: 1 hr
+
+- Start time: 1300
+
+- Finish time: 1430
+
+- Actual time needed to complete: 1.5 hr
+
+***Name of feature: Display on Data from Server on Front End***
+
+- Estimate of time needed to complete: 2 hr
+
+- Start time: 1430
+
+- Finish time: 1630
+
+- Actual time needed to complete: 2hr
 
 
 <br/><br/><br/>
