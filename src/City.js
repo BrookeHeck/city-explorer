@@ -1,6 +1,6 @@
 import React from 'react';
 import Accordion from 'react-bootstrap/Accordion';
-import Weather from './Weather.js';
+import WeatherDay from './WeatherDay.js';
 import Movie from './Movie.js';
 import './City.css';
 
@@ -22,7 +22,7 @@ class City extends React.Component {
             <Accordion.Body>
               {
                 this.props.weatherData.map((forecast, idx) => (
-                  <Weather forecast={forecast} key={idx} />
+                  <WeatherDay forecast={forecast} key={idx} />
                 ))
               }
             </Accordion.Body>
