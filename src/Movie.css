@@ -1,13 +1,20 @@
 .card-text {
-  font-size: 10px;
-  height: 150px;
+  font-size: 12px;
+  height: 100px;
+  overflow-y: scroll;
+  margin-bottom: 10px;
 }
 
-.card-body {
-  height: 656px;
-}
+.card-text::-webkit-scrollbar { width: 0 !important }
 
 #movies .card {
   margin-bottom: 5px;
-  height: 656px;
+  height: 500px;
+  width: 288px;
+}
+
+#movies .card .card-img-bottom {
+  max-width: 250px;
+  max-height: 300px;
+  object-fit: contain;
 }
