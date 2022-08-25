@@ -12,7 +12,8 @@ class Movie extends React.Component {
             <Card.Text>
               {this.props.movie.overview}
             </Card.Text>
-            <Card.Img variant="bottom" src={this.props.movie.imgPath} alt="Movie Image" />
+            {this.props.movie.imgPath && 
+            <Card.Img variant="bottom" src={this.props.movie.imgPath} alt="Movie Image" />}
           </Card.Body>
         </Card>
       </>

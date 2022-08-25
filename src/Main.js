@@ -90,13 +90,13 @@ class Main extends React.Component {
   render() {
     return(
       <main>
-        <Form id="searchForm">
+        <Form id="searchForm" onSubmit={this.handleCitySubmit}>
           <Form.Group className="mb-3">
             <Form.Label htmlFor='citySearch'>Search</Form.Label>
             <Form.Control type="text" placeholder="City" id='citySearch' name='citySearch' onChange={this.handleSearchBar}/>
             <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
-          <Button variant="primary" type="submit" onClick={this.handleCitySubmit}>
+          <Button variant="primary" type="submit" >
             Explore!
           </Button>
         </Form>
