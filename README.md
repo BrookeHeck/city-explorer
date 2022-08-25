@@ -138,6 +138,42 @@ This application allows a user to search a city. A display shows the user a map 
 
 - Actual time needed to complete: 2hr
 
+<br/><br/><br/>
+# Lab09
+### WRRC
+<img src='./whiteBoardImg/whiteBoard09.png' width='600px' height='auto' />
+
+### Features
+***Name of feature: Modularize Back-End Server***
+
+- Estimate of time needed to complete: 1 hr
+
+- Start time: 1000
+
+- Finish time: 1100
+
+- Actual time needed to complete: 1 hr
+
+***Name of feature: Modularize Front-End***
+
+- Estimate of time needed to complete: 1 hr
+
+- Start time: 1100
+
+- Finish time: 1200
+
+- Actual time needed to complete: 1 hr
+
+***Name of feature: Add Better CSS***
+
+- Estimate of time needed to complete: 1 hr
+
+- Start time: 1330
+
+- Finish time: 1430
+
+- Actual time needed to complete: 1 hr
+
 
 <br/><br/><br/>
 # Getting Started with Create React App
