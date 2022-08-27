@@ -174,6 +174,42 @@ This application allows a user to search a city. A display shows the user a map 
 
 - Actual time needed to complete: 1 hr
 
+<br/><br/><br/>
+# Lab 10
+### WRRC
+<img src='./whiteBoardImg/whiteBoard10.png' width='600px' height='auto' />
+
+### Features
+***Name of feature: Weather Cache***
+
+- Estimate of time needed to complete: 1 hr
+
+- Start time: 1300
+
+- Finish time: 1400
+
+- Actual time needed to complete: 1 hr
+
+***Name of feature: Movie Cache***
+
+- Estimate of time needed to complete: 1 hr
+
+- Start time: 1400
+
+- Finish time: 1500
+
+- Actual time needed to complete: 1 hr
+
+***Name of feature: Yelp API for Restaurants***
+
+- Estimate of time needed to complete: 2 hr
+
+- Start time: 1530
+
+- Finish time: 
+
+- Actual time needed to complete: not complete
+
 
 <br/><br/><br/>
 # Getting Started with Create React App
