@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
-import './Error.css';
+import '../css/Error.css';
 
 class Error extends React.Component {
   render() {
