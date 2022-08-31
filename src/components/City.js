@@ -7,6 +7,21 @@ import Restaurant from './Restaurant.js';
 import '../css/City.css';
 
 class City extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showMovies: true
+    }
+  }
+
+  renderRestaurants = () => {
+    this.setState({showMovies: false});
+  }
+
+  renderMovies = () => {
+    this.setState({showMovies: true});
+  }
+
   render() {
     return (
       <>
@@ -38,30 +53,34 @@ class City extends React.Component {
           onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
         >
           <Nav.Item>
-            <Nav.Link eventKey="disabled" disabled>
+            <Nav.Link onClick={this.renderMovies}>
               Movies
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="disabled" disabled>
+            <Nav.Link onClick={this.renderRestaurants}>
               Restaurants
             </Nav.Link>
           </Nav.Item>
         </Nav>
-        <div id="movies">
-          {
-            this.props.movieData.map(movie => (
-              <Movie movie={movie} key={movie.id} />
-            ))
-          }
-        </div>
-        <div id='restaurants'>
-          {
-            this.props.restaurantData.map(restaurant => (
-              <Restaurant restaurant={restaurant} key={restaurant.id} />
-            ))
-          }
-        </div>
+
+        {
+          this.state.showMovies ?
+            <div id="movies">
+              {
+                this.props.movieData.map(movie => (
+                  <Movie movie={movie} key={movie.id} />
+                ))
+              }
+            </div> :
+            <div id='restaurants'>
+              {
+                this.props.restaurantData.map(restaurant => (
+                  <Restaurant restaurant={restaurant} key={restaurant.id} />
+                ))
+              }
+            </div>
+        }
       </>
     );
   }
