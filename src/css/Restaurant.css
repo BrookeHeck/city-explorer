@@ -1,0 +1,23 @@
+#restaurants {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#restaurants .card-title {
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+#restaurants .card {
+  margin-bottom: 5px;
+  height: 450px;
+  width: 288px;
+}
+
+#restaurants .card .card-img-bottom {
+  width: 250px;
+  height: 250px;
+  object-fit: contain;
+}

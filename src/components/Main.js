@@ -16,7 +16,8 @@ class Main extends React.Component {
       error: false,
       weatherData: [],
       cityCard: '',
-      movieData: []
+      movieData: [],
+      restaurantData: []
     }
   }
 
@@ -45,6 +46,7 @@ class Main extends React.Component {
         key={this.state.cityData.place_id}
         weatherData={this.state.weatherData}
         movieData={this.state.movieData}
+        restaurantData={this.state.restaurantData}
       />
     })
   }
@@ -79,9 +81,20 @@ class Main extends React.Component {
   getCityMovies = async () => {
     try {
       let movieData = await axios.get(`${process.env.REACT_APP_SERVER}/movies?city=${this.state.searchString}`);
-      this.setState({movieData: movieData.data}, this.setMapUrl);
+      this.setState({movieData: movieData.data}, this.getCityRestaurants);
     } catch(e) {
       console.log('Error: ', e);
+      this.setState({error: true});
+    }
+  }
+
+  getCityRestaurants = async () => {
+    try {
+      let url = `${process.env.REACT_APP_SERVER}/restaurants?lat=${this.state.cityData.lat}&lon=${this.state.cityData.lon}`
+      let restaurantData = await axios.get(url);
+      this.setState({restaurantData: restaurantData.data}, this.setMapUrl);
+    } catch(error) {
+      console.log('Error', error);
       this.setState({error: true});
     }
   }

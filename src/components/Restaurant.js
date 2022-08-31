@@ -8,8 +8,8 @@ class Restaurant extends React.Component {
       <>
         <Card style={{ width: '18rem' }}>
           <Card.Body>
-            <Card.Title><a href={this.props.restaurant.url}>{this.props.restaurant.name}</a></Card.Title>
-            {this.props.restaurant.imgPath && 
+            <Card.Title><a href={this.props.restaurant.url} target='_blank' rel='noreferrer'>{this.props.restaurant.name}</a></Card.Title>
+            {this.props.restaurant.imgUrl && 
             <Card.Img variant="bottom" src={this.props.restaurant.imgUrl} alt="Restaurant Image" />}
           </Card.Body>
         </Card>

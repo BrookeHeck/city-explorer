@@ -1,7 +1,9 @@
 import React from 'react';
 import Accordion from 'react-bootstrap/Accordion';
+import Nav from 'react-bootstrap/Nav';
 import WeatherDay from './WeatherDay.js';
 import Movie from './Movie.js';
+import Restaurant from './Restaurant.js';
 import '../css/City.css';
 
 class City extends React.Component {
@@ -29,10 +31,34 @@ class City extends React.Component {
           </Accordion.Item>
         </Accordion>
         <img src={this.props.mapUrl} alt='map' />
+
+
+        <Nav
+          activeKey="/home"
+          onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
+        >
+          <Nav.Item>
+            <Nav.Link eventKey="disabled" disabled>
+              Movies
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="disabled" disabled>
+              Restaurants
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>
         <div id="movies">
           {
             this.props.movieData.map(movie => (
               <Movie movie={movie} key={movie.id} />
+            ))
+          }
+        </div>
+        <div id='restaurants'>
+          {
+            this.props.restaurantData.map(restaurant => (
+              <Restaurant restaurant={restaurant} key={restaurant.id} />
             ))
           }
         </div>
