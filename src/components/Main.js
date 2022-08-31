@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import City from './City.js';
 import Error from './Error.js';
-import './Main.css';
+import '../css/Main.css';
 
 class Main extends React.Component {
   constructor(props) {

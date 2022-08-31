@@ -2,7 +2,7 @@ import React from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import WeatherDay from './WeatherDay.js';
 import Movie from './Movie.js';
-import './City.css';
+import '../css/City.css';
 
 class City extends React.Component {
   render() {
